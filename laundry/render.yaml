@@ -1,0 +1,14 @@
+# render.yaml
+
+services:
+  - name: web
+    # Command to run before starting the service (e.g., collectstatic)
+    buildCommand: python manage.py collectstatic --noinput
+
+    # Command to start the web service (use gunicorn for Django)
+    startCommand: gunicorn laundry.wsgi:application
+
+    # Environment variables (you can use Render secrets)
+    env:
+      - key: DJANGO_SECRET_KEY
+        fromDatabase: true
